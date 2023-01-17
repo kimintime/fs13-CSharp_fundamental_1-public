@@ -21,10 +21,33 @@ namespace CSharpFundamental
         static string toTitleCase(string input)
         {
             /* Write your code here */
+
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            input = textInfo.ToTitleCase(input);
+
+            return input;
+
         }
+
+        //This is clearly wrong. 
         static int[,] matrixMultiply(int[,] array1, int[,] array2)
         {
             /* Write your code here */
+
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 2; j++ ) 
+                {
+                    //something
+
+                    for (int k = 0; k < 4; k++) 
+                    {
+                        //something
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }
