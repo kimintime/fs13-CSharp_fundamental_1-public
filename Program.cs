@@ -16,38 +16,48 @@ namespace CSharpFundamental
             int[,] arrayA = { { 3, 5, 4, 6 }, { 3, 7, 8, 3 } };
             int[,] arrayB = { { 5, 1 }, { 8, 4 }, { 2, 9 }, { 2, 3 } };
             int[,] result = matrixMultiply(arrayA, arrayB);
-            Console.WriteLine(result); //share your findings to Slack
+            //Console.WriteLine(result); //share your findings to Slack
         }
+
         static string toTitleCase(string input)
         {
-            /* Write your code here */
-
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             input = textInfo.ToTitleCase(input);
 
             return input;
-
         }
 
-        //This is clearly wrong. 
         static int[,] matrixMultiply(int[,] array1, int[,] array2)
         {
-            /* Write your code here */
+            int array1Rows = array1.GetLength(0);
+            int array1Cols = array1.GetLength(1);
 
-            for (int i = 0; i < 2; i++)
+            int array2Rows = array2.GetLength(0);
+            int array2Cols = array2.GetLength(1);
+
+            int[,] result = new int[array1Cols, array2Rows];
+
+            if (array1Rows != array2Cols)
             {
-                for (int j = 0; j < 2; j++ ) 
+                throw new InvalidOperationException("Matrices do not have the same dimension.");
+            }
+            else
+            {
+                for (int i = 0; i < array1Rows; i++)
                 {
-                    //something
-
-                    for (int k = 0; k < 4; k++) 
+                    for (int j = 0; j < array2Cols; j++)
                     {
-                        //something
+                        for (int k = 0; k < array1Cols; k++)
+                        {
+                            result[i, j] += array1[i, k] * array2[k, j];
+                        }
+
+                        Console.WriteLine(result[i, j]);
                     }
                 }
+                
+                return result;
             }
-
-            return result;
         }
     }
 }
