@@ -16,15 +16,49 @@ namespace CSharpFundamental
             int[,] arrayA = { { 3, 5, 4, 6 }, { 3, 7, 8, 3 } };
             int[,] arrayB = { { 5, 1 }, { 8, 4 }, { 2, 9 }, { 2, 3 } };
             int[,] result = matrixMultiply(arrayA, arrayB);
-            //Console.WriteLine(result); //share your findings to Slack
+            Console.WriteLine(result); //share your findings to Slack
         }
+        //This is the real solution
+        // static string toTitleCase(string input)
+        // {
+        //     TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+        //     input = textInfo.ToTitleCase(input);
 
+        //     return input;
+        // }
+
+        //This is the nonsense
         static string toTitleCase(string input)
         {
-            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-            input = textInfo.ToTitleCase(input);
+            var build = new System.Text.StringBuilder();
+            bool word = true;
 
-            return input;
+            foreach (char letter in input)
+            {
+                if (word)
+                {
+                    build.Append((char)(letter + 'A' - 'a'));
+                    word = false;
+                }
+                else  if (letter == ' ')
+                {
+                    word = true;
+                    build.Append(' ');
+                }
+                else
+                {
+                    if((short)letter >= 'a' && (short)letter <= 'z')
+                    {
+                        build.Append(letter);
+                    }
+                    else
+                    {
+                        build.Append((char)(letter - 'A' + 'a'));
+                    }
+                }
+            }
+
+            return build.ToString();
         }
 
         static int[,] matrixMultiply(int[,] array1, int[,] array2)
@@ -55,9 +89,9 @@ namespace CSharpFundamental
                         Console.WriteLine(result[i, j]);
                     }
                 }
-                
-                return result;
             }
+
+            return result;
         }
     }
 }
